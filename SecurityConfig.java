@@ -10,17 +10,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                // Permit your own internal/public endpoints
-                .requestMatchers("/public/**", "/internal/**").permitAll()
-                // Require authentication for all other requests
-                .anyRequest().authenticated()
+                .anyRequest().permitAll() // ALL requests to your app are allowed without auth
             )
-            // If using OAuth2 login
-            .oauth2Login()
-            .and()
-            // If using OAuth2 resource server (JWT)
-            //.oauth2ResourceServer().jwt()
-            ;
+            .csrf().disable() // optional: disable CSRF for APIs
+            .httpBasic().disable() // optional: disable basic auth
+            .formLogin().disable(); // optional: disable default login page
 
         return http.build();
     }
