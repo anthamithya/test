@@ -20,8 +20,15 @@ public class RestClientConfig {
                     .principal("system") // placeholder principal
                     .build();
 
-            // Trigger authorization to obtain token
-            manager.authorize(authRequest);
+            // Authorize and get the OAuth2AuthorizedClient
+            OAuth2AuthorizedClient authorizedClient = manager.authorize(authRequest);
+        
+            if (authorizedClient != null && authorizedClient.getAccessToken() != null) {
+                String token = authorizedClient.getAccessToken().getTokenValue();
+                System.out.println("Access token for " + clientRegistrationId + ": " + token);
+            } else {
+                System.out.println("No access token received for " + clientRegistrationId);
+            }
 
             // Proceed with the request
             return execution.execute(request, body);
