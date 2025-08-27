@@ -1,0 +1,7 @@
+Hello, i have couple of questions regarding your earlier message, welcome letter service will fetch the message from the SQS, talks to EIS, and then talks to CCM api using that response. 
+SQS -> Welcome Service -> EIS -> CCM
+Is my understanding correct?
+If so, whats the reference message structure of SQS message?
+What is the mapping between SQS message and EIS? And also, what is the mapping with EIS to CCM API.
+In the CCM Swagger docs, multiple examples of payload was shown, can you please let me know when to use each.
+Thanks
